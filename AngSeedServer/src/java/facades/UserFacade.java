@@ -1,5 +1,6 @@
 package facades;
 
+import deploy.DeploymentConfiguration;
 import entity.User;
 import java.util.HashMap;
 import java.util.List;
@@ -16,11 +17,11 @@ public class UserFacade {
     private EntityManagerFactory emf;
 
     public UserFacade() {
-        this(Persistence.createEntityManagerFactory("AngSeedServerPU"));
+        //this(Persistence.createEntityManagerFactory("AngSeedServerPU"));
+        this(Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME));
+        persistUsers();
     }
 
-    
-    
     public UserFacade(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -47,9 +48,15 @@ public class UserFacade {
 
         try {
             e.getTransaction().begin();
-            e.persist(userThomas);
-            e.persist(adminLars);
-            e.persist(both);
+            if (!doesUserExist(userThomas.getUserName())) {
+                e.persist(userThomas);
+            }
+            if (!doesUserExist(adminLars.getUserName())) {
+                e.persist(adminLars);
+            }
+            if (!doesUserExist(both.getUserName())) {
+                e.persist(both);
+            }
             e.getTransaction().commit();
         } finally {
             e.close();
@@ -93,16 +100,15 @@ public class UserFacade {
         return user != null && user.getPassword().equals(password) ? user.getRoles() : null;
     }
 
-    public boolean doesUserExist(String username){
-     UserFacade facade = new UserFacade();
-     User checkUser = facade.getUserByUserId(username);
-     if (checkUser  != null){
-     
-         return true;
-     }
-     
-    
+    public boolean doesUserExist(String username) {
+        //UserFacade facade = new UserFacade();
+        User checkUser = getUserByUserId(username);
+        if (checkUser != null) {
+
+            return true;
+        }
+
         return false;
     }
-    
+
 }
