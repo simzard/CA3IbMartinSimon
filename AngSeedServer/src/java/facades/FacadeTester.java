@@ -16,7 +16,9 @@ public class FacadeTester {
     
     public static void main(String[] args) {
         
-        UserFacade facade = new UserFacade(Persistence.createEntityManagerFactory("AngSeedServerPU"));
+//        UserFacade facade = new UserFacade(Persistence.createEntityManagerFactory("AngSeedServerPU"));
+        
+        UserFacade facade = new UserFacade();
         
         facade.persistUsers();
         

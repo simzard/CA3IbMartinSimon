@@ -55,6 +55,7 @@ angular.module('myApp.security', [])
                  }
               });
               $scope.error = null;
+              
               $location.path("#/view1");
             })
             .error(function (data, status, headers, config) {
@@ -65,6 +66,7 @@ angular.module('myApp.security', [])
               $scope.isUser = false;
               $scope.username = "";
               $scope.error = data.error;
+             
               //$scope.logout();  //Clears an eventual error message from timeout on the inner view
             });
   };

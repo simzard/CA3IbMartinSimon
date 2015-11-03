@@ -89,7 +89,7 @@ public class JWTAuthenticationFilter implements ContainerRequestFilter {
   }
   
   private UserPrincipal getPricipalByUserId(String userId) {
-    UserFacade facade = new UserFacade(Persistence.createEntityManagerFactory("AngSeedServerPU"));
+    UserFacade facade = new UserFacade();
     User user = facade.getUserById(userId);
     if (user != null) {
       return new UserPrincipal(user.getUserName(), user.getRoles());  
