@@ -2,11 +2,16 @@ package entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+
+@Entity
 public class User {
   
-  private String password;  //Pleeeeease dont store me in plain text
+  @Id
   private String userName;
+  private String password; 
   List<String> roles = new ArrayList();
 
   public User(String userName, String password) {
@@ -44,7 +49,5 @@ public class User {
     this.userName = userName;
   }
   
-  
- 
           
 }
