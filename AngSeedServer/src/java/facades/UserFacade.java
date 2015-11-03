@@ -93,4 +93,16 @@ public class UserFacade {
         return user != null && user.getPassword().equals(password) ? user.getRoles() : null;
     }
 
+    public boolean doesUserExist(String username){
+     UserFacade facade = new UserFacade();
+     User checkUser = facade.getUserByUserId(username);
+     if (checkUser  != null){
+     
+         return true;
+     }
+     
+    
+        return false;
+    }
+    
 }

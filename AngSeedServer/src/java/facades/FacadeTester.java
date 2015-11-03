@@ -22,18 +22,20 @@ public class FacadeTester {
         
         UserFacade facade = new UserFacade();
         
-        facade.persistUsers();
-  
+        System.out.println(facade.doesUserExist("adminLars"));
         
-        User testuser = facade.getUserByUserId("adminLars");
-        
-        System.out.println(testuser.getUserName());
-        System.out.println(testuser.getRoles().get(0));
-        
-        System.out.println("---------------------------");
-        
-      List<String> finn = facade.authenticateUser("adminLars", "test");
-        System.out.println(finn.get(0));
+//        facade.persistUsers();
+//  
+//        
+//        User testuser = facade.getUserByUserId("adminLars");
+//        
+//        System.out.println(testuser.getUserName());
+//        System.out.println(testuser.getRoles().get(0));
+//        
+//        System.out.println("---------------------------");
+//        
+//      List<String> finn = facade.authenticateUser("adminLars", "test");
+//        System.out.println(finn.get(0));
         
     }
     
