@@ -4,10 +4,10 @@
     
     <form>
         <label>Username:</label>
-        <input type="text">
+        <input type="text" ng-model="user.name">
         <label>Password:</label>
-        <input type="password">
-        <button>submit</button>
+        <input type="password" ng-model="user.password">
+        <button ng-click="addUser()">submit</button>
     </form>
 
     
