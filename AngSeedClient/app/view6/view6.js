@@ -9,13 +9,13 @@ angular.module('myApp.view6', ['ngRoute'])
   });
 }])
 
-.controller('View6Ctrl', function($http,$scope) {
-  $http.get('api/demoadmin')
-            .success(function (data, status, headers, config) {
-              $scope.data = data;
-            })
-            .error(function (data, status, headers, config) {
-              
-             });
- 
-});
+//.controller('View6Ctrl', function($http,$scope) {
+//  $http.get('api/demoadmin')
+//            .success(function (data, status, headers, config) {
+//              $scope.data = data;
+//            })
+//            .error(function (data, status, headers, config) {
+//              
+//             });
+// 
+//});
