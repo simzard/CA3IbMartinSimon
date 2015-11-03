@@ -13,13 +13,17 @@ public class UserFacade {
 
     private final Map<String, User> users = new HashMap<>();
 
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("AngSeedServerPU");
+    private EntityManagerFactory emf;
+
+    public UserFacade(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
-    public UserFacade() {
+    public void persistUsers() {
         //Test Users
         User userThomas = new User("userThomas", "test");
         userThomas.AddRole("User");
@@ -65,8 +69,8 @@ public class UserFacade {
         }
         return us;
     }
-    
-        public List<User> getUsers() {
+
+    public List<User> getUsers() {
         EntityManager em = getEntityManager();
         List<User> allUsers = null;
         try {
@@ -76,7 +80,7 @@ public class UserFacade {
             em.close();
         }
         return allUsers;
-    }       
+    }
 
     public List<String> authenticateUser(String userName, String password) {
         User user = users.get(userName);

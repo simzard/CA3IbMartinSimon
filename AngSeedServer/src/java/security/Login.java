@@ -14,6 +14,7 @@ import facades.UserFacade;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotAuthorizedException;
@@ -55,7 +56,7 @@ public class Login {
   }
   
   private List<String>  authenticate(String userName, String password){
-    UserFacade facade = new UserFacade();
+    UserFacade facade = new UserFacade(Persistence.createEntityManagerFactory("AngSeedServerPU"));
     return facade.authenticateUser(userName, password);
   }
 

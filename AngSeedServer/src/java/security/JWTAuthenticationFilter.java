@@ -18,6 +18,7 @@ import javax.annotation.Priority;
 import javax.annotation.security.DenyAll;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
+import javax.persistence.Persistence;
 import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
@@ -88,7 +89,7 @@ public class JWTAuthenticationFilter implements ContainerRequestFilter {
   }
   
   private UserPrincipal getPricipalByUserId(String userId) {
-    UserFacade facade = new UserFacade();
+    UserFacade facade = new UserFacade(Persistence.createEntityManagerFactory("AngSeedServerPU"));
     User user = facade.getUserById(userId);
     if (user != null) {
       return new UserPrincipal(user.getUserName(), user.getRoles());  
