@@ -5,6 +5,8 @@
  */
 package facades;
 
+import entity.User;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -21,6 +23,17 @@ public class FacadeTester {
         UserFacade facade = new UserFacade();
         
         facade.persistUsers();
+  
+        
+        User testuser = facade.getUserByUserId("adminLars");
+        
+        System.out.println(testuser.getUserName());
+        System.out.println(testuser.getRoles().get(0));
+        
+        System.out.println("---------------------------");
+        
+      List<String> finn = facade.authenticateUser("adminLars", "test");
+        System.out.println(finn.get(0));
         
     }
     

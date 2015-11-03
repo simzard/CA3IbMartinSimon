@@ -57,9 +57,9 @@ public class UserFacade {
     }
 
     //Finds User by ID
-    public User getUserById(String id) {
+    public User getUserByUserId(String username) {
         EntityManager em = getEntityManager();
-        User u = em.find(User.class, id);
+        User u = em.find(User.class, username);
         return u;
     }
 
@@ -89,7 +89,7 @@ public class UserFacade {
     }
 
     public List<String> authenticateUser(String userName, String password) {
-        User user = users.get(userName);
+        User user = getUserByUserId(userName);
         return user != null && user.getPassword().equals(password) ? user.getRoles() : null;
     }
 
