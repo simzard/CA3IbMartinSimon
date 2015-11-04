@@ -1,1 +1,34 @@
 <h2>Company Info</h2>
+
+<form>
+
+    <label>Search text</label>
+    <input type="text" ng-model="search">
+    <label>Options</label>
+    <select ng-model="optionList" 
+            ng-options="option as option.label for option in options">           
+    </select>
+    <label>Country</label>
+    <select ng-model="countryList" 
+            ng-options="country as country.label for country in countries">           
+    </select>
+
+    <br>
+    <button ng-click="find()">
+        Find! 
+    </button>
+
+    <p>
+        Country: {{countryList.label}} <br>
+        Option: {{optionList.label}} <br>
+        Search: {{search}} <br>
+        Url: {{"http://cvrapi.dk/api" + optionsString}}
+    </p>
+
+    <h3>
+        {{data.name}}
+    </h3>
+
+
+
+</form>
