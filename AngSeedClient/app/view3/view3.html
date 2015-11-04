@@ -6,7 +6,8 @@
     <input type="text" ng-model="search">
     <label>Options</label>
     <select ng-model="optionList" 
-            ng-options="option as option.label for option in options">           
+            ng-options="option as option.label for option in options">
+            
     </select>
     <label>Country</label>
     <select ng-model="countryList" 
@@ -18,16 +19,48 @@
         Find! 
     </button>
 
-    <p>
+<!--    <p>
         Country: {{countryList.label}} <br>
         Option: {{optionList.label}} <br>
         Search: {{search}} <br>
         Url: {{"http://cvrapi.dk/api" + optionsString}}
-    </p>
+    </p>-->
 
     <h3>
         {{data.name}}
     </h3>
+    <table>
+        <thead>
+        <td></td>
+        </thead> 
+
+        <tbody ng-show="data.name">
+            <tr>
+                <td>CVR number </td>
+                <td>{{data.vat}}</td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td>{{data.address}}</td>
+            </tr>
+            <tr>
+                <td>Zip+City</td>
+                <td>{{data.zipcode}} {{data.city}}</td>
+            </tr>
+            <tr>
+                <td>Start Date</td>
+                <td>{{data.startdate}}</td>
+            </tr>
+            <tr>
+                <td>Employees</td>
+                <td>{{data.employees}}</td>
+            </tr>
+            
+                
+        </tbody>
+    </table>
+    
+
 
 
 

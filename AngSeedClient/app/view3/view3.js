@@ -28,6 +28,9 @@ angular.module('myApp.view3', ['ngRoute'])
                 }];
             
             $scope.options = [{
+                    value: 'search',
+                    label: 'normal search'
+                }, {
                     value: 'vat',
                     label: 'vat'
                 }, {
@@ -35,22 +38,23 @@ angular.module('myApp.view3', ['ngRoute'])
                     label: 'name'
                 }, {
                     value: 'produ',
-                    label: 'produ'
+                    label: 'production unit'
                 }, {
                     value: 'phone',
-                    label: 'phone'
+                    label: 'phone number'
                 }];
 
 
 
             $scope.find = function () {
-                document.domain = "localhost";
+                var dataObj = {
+                    search: $scope.search,
+                    option: $scope.optionList.label,
+                    country: $scope.countryList.label
+                }
                 
-                $scope.optionsString = "?";
-                $scope.optionsString += $scope.optionList.label + "=" + $scope.search;
-                $scope.optionsString += "&country=" + $scope.countryList.label;
                 
-                $http.get('http://cvrapi.dk/api' + $scope.optionsString)
+                $http.post('api/company', dataObj)
                         .success(function (data, status, headers, config) {
                             $scope.data = data;
                         })
