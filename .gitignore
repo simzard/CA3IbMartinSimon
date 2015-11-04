@@ -2,4 +2,4 @@
 /AngSeedServer/nbproject/private/
 /AngSeedClient/nbproject/private/
 /AngSeedServer/dist/
-/AngSeedServer/src/conf/persistence.xml
+persistence.xml
