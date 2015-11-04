@@ -32,22 +32,30 @@ public class UserResource {
         JsonObject userInJSON = new JsonParser().parse(userJSON).getAsJsonObject();
         String username = userInJSON.get("username").getAsString();
         String password = userInJSON.get("password").getAsString();
-        JsonArray JsonRoles = userInJSON.get("roles").getAsJsonArray();
+        //JsonArray JsonRoles = userInJSON.get("roles").getAsJsonArray();
 
-        JsonArray personPhones = new JsonArray();
+        System.out.println("username:" + username);
+        System.out.println("password:" + password);
+//        System.out.print("\n\nroles:");
+//        for (int i = 0; i < JsonRoles.size(); i++) {
+//            System.out.print(JsonRoles.get(i).toString());
+//        }
 
+        //JsonArray personPhones = new JsonArray();
         List<String> rolesList = new ArrayList();
 
-        for (int i = 0; i < JsonRoles.size(); i++) {
-            rolesList.add(JsonRoles.get(i).toString());
-        }
+//        for (int i = 0; i < JsonRoles.size(); i++) {
+//            rolesList.add(JsonRoles.get(i).toString());
+//        }
+        List<String> TMPROLES = new ArrayList();
+        TMPROLES.add("User");
 
-        User newUser = new User(username, password, rolesList);
-        
-        if(facade.doesUserExist(username)){
-        
-        return "User allready exists";
-        
+        User newUser = new User(username, password, TMPROLES);
+
+        if (facade.doesUserExist(username)) {
+
+            return "{\"message\": \"User allready exists\"}";
+
         }
 
         facade.createUser(newUser);
@@ -69,8 +77,7 @@ public class UserResource {
 //        JsonParser jp = new JsonParser();
 //        JsonElement je = jp.parse(jsonResponse);
 //        String prettyJsonString = gson.toJson(je);
-
-        return "User is created";
+        return "{\"message\": \"User is created\"}";
 
     }
 

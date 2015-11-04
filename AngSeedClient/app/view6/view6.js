@@ -19,10 +19,15 @@ angular.module('myApp.view6', ['ngRoute'])
 //             });
 //
             $scope.addUser = function () {
-                var data = JSON.stringify($scope.user);
-
-                $http.post("api/demouser", data).success(function (data, status) {
-                    $scope.hello = data;
+                var dataObj = {
+				username : $scope.user.name,
+				password : $scope.user.password,				
+		};	
+		
+                $http.post("api/demouser", dataObj).success(function (data, status) {
+                    $scope.result = data.message;
+                }).error(function (data, status) {
+                    $scope.result = "Some error occured!";
                 })
             }
 

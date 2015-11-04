@@ -75,7 +75,9 @@ public class UserFacade {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(us);
+            if (!doesUserExist(us.getUserName())) {
+                em.persist(us);
+            }
             em.getTransaction().commit();
         } finally {
             em.close();
