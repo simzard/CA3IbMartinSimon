@@ -20,11 +20,13 @@ public class ApplicationConfig extends Application {
    * all resources defined in the project.
    * If required, comment out calling this method in getClasses().
    */
-  private void addRestResourceClasses(java.util.Set<java.lang.Class<?>> resources) {
+  private void addRestResourceClasses(Set<Class<?>> resources) {
     resources.add(rest.AdminResource.class);
+    resources.add(rest.CompanyResource.class);
+    resources.add(rest.CurrencyResource.class);
     resources.add(rest.UserResource.class);
-    resources.add(security.JWTAuthenticationFilter.class);
-    resources.add(security.Login.class);
+        resources.add(security.JWTAuthenticationFilter.class);
+        resources.add(security.Login.class);
         resources.add(security.NotAuthorizedExceptionMapper.class);
         resources.add(security.RolesAllowedFilter.class);
   }
