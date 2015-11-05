@@ -11,7 +11,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("demoadmin")
+@Path("admin")
 //@RolesAllowed("Admin")
 public class AdminResource {
 
@@ -21,7 +21,7 @@ public class AdminResource {
     @Path("users")
     @Produces(MediaType.APPLICATION_JSON) 
     public String getUsers() {
-        List<User> users; //facade.getUsers();
+        List<User> users = facade.getUsers();
         
         return "{\"message\": \"hej\"}";
     }

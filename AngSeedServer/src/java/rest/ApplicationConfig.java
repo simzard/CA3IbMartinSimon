@@ -23,9 +23,8 @@ public class ApplicationConfig extends Application {
   private void addRestResourceClasses(Set<Class<?>> resources) {
     resources.add(rest.AdminResource.class);
     resources.add(rest.CompanyResource.class);
-    resources.add(rest.CurrencyResource.class);
     resources.add(rest.UserResource.class);
-        resources.add(security.JWTAuthenticationFilter.class);
+    resources.add(security.JWTAuthenticationFilter.class);
         resources.add(security.Login.class);
         resources.add(security.NotAuthorizedExceptionMapper.class);
         resources.add(security.RolesAllowedFilter.class);
