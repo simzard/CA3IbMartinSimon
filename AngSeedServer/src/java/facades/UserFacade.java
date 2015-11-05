@@ -17,8 +17,8 @@ public class UserFacade {
     private EntityManagerFactory emf;
 
     public UserFacade() {
-        //this(Persistence.createEntityManagerFactory("AngSeedServerPU"));
-        this(Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME));
+        this(Persistence.createEntityManagerFactory("AngSeedServerPU"));
+        //this(Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME));
         persistUsers();
     }
 
