@@ -1,54 +1,70 @@
 package facades;
 
-import entity.ExchangeRate;
-import java.io.IOException;
+
 import org.xml.sax.*;
 import org.xml.sax.helpers.*;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import entity.Currency;
 
 public class XmlReader extends DefaultHandler {
 
-    List<String> dailyRates = new ArrayList<String>();
-    int elementCounter = 0;
-    ExchangeRate theDailyRate = new ExchangeRate();
+    private Map<String, Currency> theRates = new HashMap<>();
+
+    DateFormat dateFormat;
+    Date date;
+    int elementCounter;
+    
+    String dateToday;
 
     @Override
     public void startDocument() throws SAXException {
+        elementCounter = 0;
+        dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        date = new Date();
 
     }
 
     @Override
     public void endDocument() throws SAXException {
-        
-        theDailyRate.setAUD(dailyRates.get(2));
-        
-        System.out.println(theDailyRate.getAUD());
-        
-        
 
+        // call facade with hashmap
+        
     }
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 
-        int elementNO = attributes.getLength() - 1;
+        if (elementCounter >= 2) {
+            Currency value = new Currency();
+            for (int i = 0; i < attributes.getLength(); i++) {
 
-        System.out.print("Element: " + localName + ": ");
-        for (int i = 0; i < attributes.getLength(); i++) {
-            System.out.print("[Atribute: NAME: " + attributes.getLocalName(i) + " VALUE: " + attributes.getValue(i) + "] ");
+                switch (i) {
 
-            if (i == elementNO) {
+                    case (0):
+                        value.setCode(attributes.getValue(i));
+                        break;
 
-                dailyRates.add(attributes.getValue(i));
+                    case (1):
+                        value.setDescribtion(attributes.getValue(i));
+                        break;
 
-                System.out.println(attributes.getValue(i));
+                    case (2):
+                        value.setRate(attributes.getValue(i));
+                        break;
+                }
 
             }
-
-        }
+            value.setDate(dateFormat.format(date));
+            theRates.put(value.getCode(), value);
+            System.out.println(value);
+        }//end of loop
         System.out.println("");
+
+        elementCounter = elementCounter + 1;
     }
 
 }

@@ -37,7 +37,7 @@ public class FacadeTester {
 
        ExchangeRateFacade xf = new ExchangeRateFacade();
        
-       xf.persistExchangeRates();
+       xf.fetchExchangeRates();
        
     }
 
