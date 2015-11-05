@@ -6,8 +6,13 @@
 package facades;
 
 import deploy.DeploymentConfiguration;
+import entity.Currency;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -25,6 +30,7 @@ import org.xml.sax.helpers.XMLReaderFactory;
  */
 public class ExchangeRateFacade {
 
+    private Map<String, Currency> theDailyRates;
     private EntityManagerFactory emf;
 
     public ExchangeRateFacade() {
@@ -48,13 +54,91 @@ public class ExchangeRateFacade {
             xr.setContentHandler(new XmlReader());
             URL url = new URL("http://www.nationalbanken.dk/_vti_bin/DN/DataService.svc/CurrencyRatesXML?lang=en");
             xr.parse(new InputSource(url.openStream()));
+
+            persistDailyRates();
+
         } catch (SAXException | IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Fætter");
+
     }
 
-   
-    
-    
+    public void persistDailyRates() {
+
+        EntityManager e = getEntityManager();
+
+        try {
+            e.getTransaction().begin();
+            for (String key : theDailyRates.keySet()) {
+                Currency value = theDailyRates.get(key);
+
+                e.persist(value);
+
+            }
+            e.getTransaction().commit();
+        } finally {
+
+            e.close();
+        }
+    }
+
+    //------------------------ NESTED CLASS --------------------------------  
+    public class XmlReader extends DefaultHandler {
+
+        private Map<String, Currency> theRates = new HashMap<>();
+
+        DateFormat dateFormat;
+        Date date;
+        int elementCounter;
+
+        String dateToday;
+
+        @Override
+        public void startDocument() throws SAXException {
+            elementCounter = 0;
+            dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            date = new Date();
+                  }
+
+        @Override
+        public void endDocument() throws SAXException {
+            theDailyRates = theRates;
+
+        }
+
+        @Override
+        public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+
+            if (elementCounter >= 2) {
+                Currency value = new Currency();
+                for (int i = 0; i < attributes.getLength(); i++) {
+
+                    switch (i) {
+
+                        case (0):
+                            value.setCode(attributes.getValue(i));
+                            break;
+
+                        case (1):
+                            value.setDescribtion(attributes.getValue(i));
+                            break;
+
+                        case (2):
+                            value.setRate(attributes.getValue(i));
+                            break;
+                    }
+
+                }
+                value.setDate(dateFormat.format(date));
+                
+                theRates.put(value.getCode(), value);
+                System.out.println(value);
+            }
+            System.out.println("");
+
+            elementCounter = elementCounter + 1;
+        }
+
+    }
+
 }
