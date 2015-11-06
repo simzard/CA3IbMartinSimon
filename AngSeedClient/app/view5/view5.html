@@ -3,10 +3,10 @@
     <table class="table">
         <thead>
             <tr>
-                <td>Username</td>
-                <td>Password</td>
-                <td>Roles</td>
-                <td><!-- for delete --></td>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Roles</th>
+                <td><!-- for delete column --></td>
             </tr>
         </thead>
 
@@ -14,11 +14,10 @@
             <tr ng-repeat="user in data">
                 <td>{{user.userName}}</td>
                 <td>{{user.password}}</td>
-                <td {{user.roles | rolesToString}}>
-                    
-                </td>
                 <td>
-                    <a href="#">delete</a>
+                    {{user.roles | rolesToString}}
+                <td>
+                    <a href="#/view5" ng-click="deleteUser(user.userName)">delete</a>
                 </td>
 
             </tr>
