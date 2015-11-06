@@ -7,16 +7,29 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @Path("admin")
-@RolesAllowed("Admin")
+//@RolesAllowed("Admin")
 public class AdminResource {
 
     UserFacade facade = new UserFacade();
+    
+    @DELETE
+    @Path("user/{id}")
+    @Produces(MediaType.APPLICATION_JSON) 
+    public String deleteUser(@PathParam("id") String id) {
+        if (facade.deleteUser(id)) {
+            return "{\"message\": \"user deleted\"}";
+        }
+        
+        return "{\"message\": \"user NOT deleted\"}";
+    }
     
     @GET
     @Path("users")
