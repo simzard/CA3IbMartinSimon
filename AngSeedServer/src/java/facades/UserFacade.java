@@ -8,11 +8,10 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 public class UserFacade {
-
-    private final Map<String, User> users = new HashMap<>();
 
     private EntityManagerFactory emf;
 
@@ -34,15 +33,13 @@ public class UserFacade {
         //Test Users
         User userThomas = new User("userThomas", "test");
         userThomas.AddRole("User");
-        users.put(userThomas.getUserName(), userThomas);
+
         User adminLars = new User("adminLars", "test");
         adminLars.AddRole("Admin");
-        users.put(adminLars.getUserName(), adminLars);
 
         User both = new User("user_adminIb", "test");
         both.AddRole("User");
         both.AddRole("Admin");
-        users.put(both.getUserName(), both);
 
         EntityManager e = getEntityManager();
 
@@ -85,11 +82,31 @@ public class UserFacade {
         return us;
     }
 
+    public boolean deleteUser(String username) {
+        EntityManager em = getEntityManager();
+        if (doesUserExist(username)) {
+
+            try {
+                em.getTransaction().begin();
+                User us = em.find(User.class, username);
+                em.remove(us);
+                em.getTransaction().commit();
+
+            } finally {
+                em.close();
+
+            }
+            return true;
+        }
+
+        return false;
+    }
+
     public List<User> getUsers() {
         EntityManager em = getEntityManager();
         List<User> allUsers = null;
         try {
-            TypedQuery<User> query = em.createQuery("SELECT p FROM User p", User.class);
+            Query query = em.createQuery("SELECT p FROM User p");
             allUsers = query.getResultList();
         } finally {
             em.close();
