@@ -37,10 +37,10 @@ public class FacadeTester {
 //
 //        xf.fetchExchangeRates();
         
-//        System.out.println(xf.getDailyRates());
+        System.out.println(xf.getDailyRates());
         
                 
-        System.out.println(xf.convertCurrency(100,"dkr", "nok"));
+        System.out.println(xf.convertCurrency(10234230,"dkr", "usd"));
     }
 
 }

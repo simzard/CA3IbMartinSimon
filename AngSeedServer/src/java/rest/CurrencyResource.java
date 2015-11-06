@@ -92,13 +92,13 @@ public class CurrencyResource {
     @Produces(MediaType.TEXT_PLAIN)
 
      //:amount/:from currency/:tocurrency
-    public String calculate(
+    public float calculate(
             @PathParam("amount") float amount,
             @PathParam("fromCurrency") String fromCurrency,
             @PathParam("toCurrency") String toCurrency
     ) {
-  
-        return ""+facade.convertCurrency(amount, fromCurrency, toCurrency);
+            
+        return facade.convertCurrency(amount, fromCurrency, toCurrency);
        
     }
 

@@ -5,16 +5,19 @@
  */
 package utils;
 
+import facades.ExchangeRateFacade;
 import java.util.Calendar;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-class MyParsingJob implements Runnable {
+public class RatesUpdater implements Runnable {
 
+    ExchangeRateFacade xf = new ExchangeRateFacade();
+    
     private ScheduledExecutorService scheduler;
 
-    public void BGJobManager() {
+    public void JobScheduler() {
 
         scheduler = Executors.newSingleThreadScheduledExecutor();
         Calendar cal = Calendar.getInstance();
@@ -24,26 +27,22 @@ class MyParsingJob implements Runnable {
 
         currentTimeHour = Calendar.AM == 0 ? currentTimeHour + 12 : currentTimeHour;
         int startTime = 24 - (currentTimeHour - 8);
-        System.out.println("StartTime: " + startTime);
+        
         startTime = cal.get(Calendar.SECOND);
 
-        System.out.println(currentTimeHour);
-        scheduler.scheduleAtFixedRate(new MyParsingJob(), startTime, 1, TimeUnit.HOURS);
+        
+       
+        scheduler.scheduleAtFixedRate(new RatesUpdater(), startTime, 24, TimeUnit.HOURS);
     }
 
-    public MyParsingJob() {
-    }
-
+   
     @Override
     public void run() {
+        xf.fetchExchangeRates();
     }
+
+
+
+
+   
 }
-//it
-//class tester {
-//
-//    public static void main(String[] args) {
-//        YourParsingJob x = new YourParsingJob();
-//        x.BGJobManager();
-//
-//    }
-//}
