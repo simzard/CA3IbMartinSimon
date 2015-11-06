@@ -15,6 +15,9 @@ import java.util.List;
 public class UserFacadeTest {
     public static void main(String[] args) {
         UserFacade uf = new UserFacade();
+        
+        uf.deleteUser("adminLars");
+        
         List<User> us = uf.getUsers();
         
         for (User u : us ) {

@@ -1,1 +1,28 @@
 <h2>All Users</h2>
+<div class="containers">
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Username</td>
+                <td>Password</td>
+                <td>Roles</td>
+                <td><!-- for delete --></td>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="user in data">
+                <td>{{user.userName}}</td>
+                <td>{{user.password}}</td>
+                <td {{user.roles | rolesToString}}>
+                    
+                </td>
+                <td>
+                    <a href="#">delete</a>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+</div>

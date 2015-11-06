@@ -1,5 +1,6 @@
 package rest;
 
+import com.google.gson.Gson;
 import entity.User;
 import facades.UserFacade;
 import java.text.SimpleDateFormat;
@@ -12,7 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @Path("admin")
-//@RolesAllowed("Admin")
+@RolesAllowed("Admin")
 public class AdminResource {
 
     UserFacade facade = new UserFacade();
@@ -23,7 +24,8 @@ public class AdminResource {
     public String getUsers() {
         List<User> users = facade.getUsers();
         
-        return "{\"message\": \"hej\"}";
+        return new Gson().toJson(users);
+                
     }
    
 
