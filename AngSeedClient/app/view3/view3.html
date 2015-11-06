@@ -1,67 +1,121 @@
 <h2>Company Info</h2>
 
-<form>
-
-    <label>Search text</label>
-    <input type="text" ng-model="search">
-    <label>Options</label>
-    <select ng-model="optionList" 
-            ng-options="option as option.label for option in options">
-            
-    </select>
-    <label>Country</label>
-    <select ng-model="countryList" 
-            ng-options="country as country.label for country in countries">           
-    </select>
-
-    <br>
-    <button ng-click="find()">
-        Find! 
-    </button>
-
-<!--    <p>
-        Country: {{countryList.label}} <br>
-        Option: {{optionList.label}} <br>
-        Search: {{search}} <br>
-        Url: {{"http://cvrapi.dk/api" + optionsString}}
-    </p>-->
-
-    <h3>
-        {{data.name}}
-    </h3>
-    <table>
-        <thead>
-        <td></td>
-        </thead> 
-
-        <tbody ng-show="data.name">
-            <tr>
-                <td>CVR number </td>
-                <td>{{data.vat}}</td>
-            </tr>
-            <tr>
-                <td>Address</td>
-                <td>{{data.address}}</td>
-            </tr>
-            <tr>
-                <td>Zip+City</td>
-                <td>{{data.zipcode}} {{data.city}}</td>
-            </tr>
-            <tr>
-                <td>Start Date</td>
-                <td>{{data.startdate}}</td>
-            </tr>
-            <tr>
-                <td>Employees</td>
-                <td>{{data.employees}}</td>
-            </tr>
-            
-                
-        </tbody>
-    </table>
-    
+<div class="container">
 
 
 
+    <form class="form">
 
-</form>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td><label class="item">Search text</label></td>
+                    <td><input type="text" ng-model="search"></td>
+                </tr>
+                <tr>
+                    <td><label class="item">Options</label></td>
+                    <td><select ng-model="optionList" 
+                                ng-app=""ng-options="option as option.label for option in options">
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label class="item">Country</label></td>
+                    <td>
+                        <select ng-model="countryList" 
+                                ng-options="country as country.label for country in countries">           
+                        </select>
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+        <br>
+        <button class="btn-primary" ng-click="find()">
+            Find! 
+        </button>
+
+        <!--    <p>
+                Country: {{countryList.label}} <br>
+                Option: {{optionList.label}} <br>
+                Search: {{search}} <br>
+                Url: {{"http://cvrapi.dk/api" + optionsString}}
+            </p>-->
+
+        <h3>
+            {{data.name}}
+        </h3>
+        <div ng-show="data.name">
+            <table class="table">
+                <thead>
+                <td></td>
+                </thead> 
+
+                <tbody >
+                    <tr>
+                        <td>CVR number </td>
+                        <td>{{data.vat}}</td>
+                    </tr>
+                    <tr>
+                        <td>Address</td>
+                        <td>{{data.address}}</td>
+                    </tr>
+                    <tr>
+                        <td>Zip+City</td>
+                        <td>{{data.zipcode}} {{data.city}}</td>
+                    </tr>
+                    <tr>
+                        <td>Start Date</td>
+                        <td>{{data.startdate}}</td>
+                    </tr>
+                    <tr>
+                        <td>Employees</td>
+                        <td>{{data.employees}}</td>
+                    </tr>
+                    <tr>
+                        <td>Status</td>
+                        <td>{{data.status}}</td>
+                    </tr>
+                    <tr><td>...</td></tr>
+                </tbody>
+            </table>
+
+            <!--production units-->
+            <h4>Production Units</h4>
+            <div>
+                <table class="table">
+                    <thead>
+
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="pu in data.productionunits">
+                            <td>
+                    <uib-accordion>
+                        <uib-accordion-group heading="{{pu.name}}" >
+
+                            <ul ng-repeat="(key,value) in pu">
+                                <li>{{key}} : {{value}}</li>
+                            </ul>
+                        </uib-accordion-group>
+                    </uib-accordion>
+                    </td>
+
+                    </tr>
+
+
+
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+
+
+
+    </form>
+
+</div>

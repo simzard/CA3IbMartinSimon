@@ -4,13 +4,17 @@
     
     <form class="form">
         <label>Username:</label>
-        <input type="text" ng-model="user.name">
+        <input type="text" ng-model="user.name"><br>
         <label>Password:</label>
-        <input type="password" ng-model="user.password">
-        <button ng-click="addUser()">submit</button>
+        <input type="password" ng-model="user.password"><br>
+        <button class="btn-primary" ng-click="addUser()">submit</button>
     </form>
     
-    <p>Result: {{result}}</p>
+    
+    <div>
+        <p>Result: {{result}}</p>
+    </div>
+    
 
     
 </div>
