@@ -6,6 +6,7 @@
 //import com.google.gson.JsonElement;
 //import com.google.gson.JsonObject;
 //import com.google.gson.JsonParser;
+//import exceptions.CurrencyNotFoundException;
 //import facades.ExchangeRateFacade;
 //import java.util.List;
 //import javax.annotation.security.RolesAllowed;
@@ -25,17 +26,21 @@
 //    @GET
 //    @Path("dailyrate/{id}")
 //    @Produces(MediaType.APPLICATION_JSON)
-//    public String getValutaById(@PathParam("id") String stringId) {
+//    public String getValutaById(@PathParam("id") String stringId) throws CurrencyNotFoundException {
 //
 //        int valutaId = -1;
 //
 //        try {
 //            valutaId = Integer.parseInt(stringId);
 //        } catch (NumberFormatException e) {
-////            throw new CurrencyNotFoundException(("That CurrencyCode does not exists"));
+//            throw new CurrencyNotFoundException(("That CurrencyCode does not exists"));
 //        }
 //
 //        Currency c = facade.getCurrency();
+//        
+//         if (c == null) {
+//            throw new CurrencyNotFoundException("That CurrencyCode does not exists");
+//        }
 //
 //        JsonObject outJSON = new JsonObject();
 //
