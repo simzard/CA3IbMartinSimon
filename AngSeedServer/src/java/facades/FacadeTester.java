@@ -35,9 +35,12 @@ public class FacadeTester {
 //        System.out.println(finn.get(0));
         ExchangeRateFacade xf = new ExchangeRateFacade();
 //
-        xf.fetchExchangeRates();
+//        xf.fetchExchangeRates();
         
-        System.out.println(xf.getDailyRates());
+//        System.out.println(xf.getDailyRates());
+        
+                
+        System.out.println(xf.convertCurrency(100,"dkr", "nok"));
     }
 
 }

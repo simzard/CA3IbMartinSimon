@@ -11,6 +11,7 @@ import facades.ExchangeRateFacade;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -55,7 +56,7 @@ public class CurrencyResource {
 //
 //        return prettyJsonString;
 //    }
-    
+
     @GET
     @Path("dailyrate")
     @Produces(MediaType.APPLICATION_JSON)
@@ -85,4 +86,20 @@ public class CurrencyResource {
 
         return prettyJsonString;
     }
+
+    @GET
+    @Path("calculator/{amount}/{fromCurrency}/{toCurrency}")
+    @Produces(MediaType.TEXT_PLAIN)
+
+     //:amount/:from currency/:tocurrency
+    public String calculate(
+            @PathParam("amount") float amount,
+            @PathParam("fromCurrency") String fromCurrency,
+            @PathParam("toCurrency") String toCurrency
+    ) {
+  
+        return ""+facade.convertCurrency(amount, fromCurrency, toCurrency);
+       
+    }
+
 }

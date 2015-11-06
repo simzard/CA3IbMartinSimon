@@ -14,6 +14,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
@@ -98,7 +99,45 @@ public class ExchangeRateFacade {
         }
 
         return dailyRates;
-      
+
+    }
+
+    // fromCurrency andf toCurrency takes the code (ex.AUD) as arguments
+    public float convertCurrency(float amount, String fromCurrency, String toCurrency) {
+
+        List<Currency> ratesList;
+        ratesList = getDailyRates();
+
+        float from = 0;
+        float to = 0;
+
+        if (fromCurrency.equalsIgnoreCase("dkr")) {
+
+            from = 100;
+        }
+
+        if (toCurrency.equalsIgnoreCase("dkr")) {
+
+            to = 100;
+        }
+
+        for (Currency cur : ratesList) {
+
+            String code = cur.getCode();
+
+            if (code.equalsIgnoreCase(fromCurrency)) {
+
+                from = Float.parseFloat(cur.getRate());
+            }
+
+            if (code.equalsIgnoreCase(toCurrency)) {
+
+                to = Float.parseFloat(cur.getRate());
+            }
+
+        }
+
+        return (from / to) * amount;
     }
 
     //------------------------ NESTED CLASS --------------------------------  
