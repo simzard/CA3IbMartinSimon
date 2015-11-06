@@ -7,13 +7,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import entity.Currency;
-import exceptions.CurrencyNotFoundException;
 import facades.ExchangeRateFacade;
 import java.util.List;
-import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -58,9 +55,9 @@ public class CurrencyResource {
 //
 //        return prettyJsonString;
 //    }
-
+    
     @GET
-    @Path("dailyrate/")
+    @Path("dailyrate")
     @Produces(MediaType.APPLICATION_JSON)
     public String getAllValuta() {
 
