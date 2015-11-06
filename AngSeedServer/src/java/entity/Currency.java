@@ -8,21 +8,22 @@ package entity;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
  *
  * @author sabre
  */
-
 @Entity
 public class Currency implements Serializable {
-    
-    
-    @Id @GeneratedValue long id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String date;
     private String code;
-    private String describtion;
+    private String description;
     private String rate;
 
     public String getDate() {
@@ -42,11 +43,11 @@ public class Currency implements Serializable {
     }
 
     public String getDescribtion() {
-        return describtion;
+        return description;
     }
 
     public void setDescribtion(String describtion) {
-        this.describtion = describtion;
+        this.description = describtion;
     }
 
     public String getRate() {
@@ -59,9 +60,7 @@ public class Currency implements Serializable {
 
     @Override
     public String toString() {
-        return "Currency{" + "date=" + date + ", code=" + code + ", describtion=" + describtion + ", rate=" + rate + '}';
+        return "Currency{" + "date=" + date + ", code=" + code + ", describtion=" + description + ", rate=" + rate + '}';
     }
-    
-    
-    
+
 }

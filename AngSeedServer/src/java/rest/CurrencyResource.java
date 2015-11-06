@@ -68,7 +68,7 @@
 //
 //        JsonArray ja = new JsonArray();
 //
-//        List<Currency> CurrencyList = facade.getAllCurrency();
+//        List<Currency> CurrencyList = facade.getDailyRates();
 //
 //        for (Currency c : CurrencyList) {
 //
