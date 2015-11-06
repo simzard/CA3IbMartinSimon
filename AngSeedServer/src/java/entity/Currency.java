@@ -62,6 +62,6 @@ public class Currency implements Serializable {
         return "Currency{" + "date=" + date + ", code=" + code + ", describtion=" + describtion + ", rate=" + rate + '}';
     }
     
-          
+    
     
 }
