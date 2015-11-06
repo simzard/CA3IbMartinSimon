@@ -19,11 +19,12 @@ public class ApplicationConfig extends Application {
      * out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(exceptions.CurrencyNotFoundExceptionMapper.class);
         resources.add(exceptions.GenericExceptionMapper.class);
         resources.add(exceptions.NotFoundExceptionMapper.class);
-        resources.add(exceptions.PersonNotFoundExceptionMapper.class);
         resources.add(rest.AdminResource.class);
         resources.add(rest.CompanyResource.class);
+        resources.add(rest.CurrencyTest.class);
         resources.add(rest.UserResource.class);
         resources.add(security.JWTAuthenticationFilter.class);
         resources.add(security.Login.class);
