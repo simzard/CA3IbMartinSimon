@@ -84,22 +84,21 @@ public class ExchangeRateFacade {
             e.close();
         }
     }
-    
-    
-    public String getDailyRates(){
-    
+
+    public List<Currency> getDailyRates() {
+
         EntityManager em = getEntityManager();
         List<Currency> dailyRates = null;
-        
+
         try {
             Query query = em.createQuery("SELECT c FROM Currency c");
             dailyRates = query.getResultList();
         } finally {
             em.close();
         }
-        
-        return new Gson().toJson(dailyRates);
-         
+
+        return dailyRates;
+      
     }
 
     //------------------------ NESTED CLASS --------------------------------  
@@ -118,7 +117,7 @@ public class ExchangeRateFacade {
             elementCounter = 0;
             dateFormat = new SimpleDateFormat("yyyy/MM/dd");
             date = new Date();
-                  }
+        }
 
         @Override
         public void endDocument() throws SAXException {
@@ -150,12 +149,9 @@ public class ExchangeRateFacade {
 
                 }
                 value.setDate(dateFormat.format(date));
-                
-                theRates.put(value.getCode(), value);
-                System.out.println(value);
-            }
-            System.out.println("");
 
+                theRates.put(value.getCode(), value);
+            }
             elementCounter = elementCounter + 1;
         }
 

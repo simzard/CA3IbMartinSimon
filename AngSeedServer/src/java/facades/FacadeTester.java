@@ -18,10 +18,10 @@ public class FacadeTester {
 
     public static void main(String[] args) {
 
-        UserFacade facade = new UserFacade(Persistence.createEntityManagerFactory("AngSeedServerPU"));
+//        UserFacade facade = new UserFacade(Persistence.createEntityManagerFactory("AngSeedServerPU"));
 //        UserFacade facade = new UserFacade();
 //        System.out.println(facade.doesUserExist("adminLars"));
-         facade.persistUsers();
+//         facade.persistUsers();
 //  
 //        
 //        User testuser = facade.getUserByUserId("adminLars");
@@ -33,10 +33,11 @@ public class FacadeTester {
 //        
 //      List<String> finn = facade.authenticateUser("adminLars", "test");
 //        System.out.println(finn.get(0));
-//        ExchangeRateFacade xf = new ExchangeRateFacade();
+        ExchangeRateFacade xf = new ExchangeRateFacade();
 //
-//        xf.fetchExchangeRates();
-
+        xf.fetchExchangeRates();
+        
+        System.out.println(xf.getDailyRates());
     }
 
 }

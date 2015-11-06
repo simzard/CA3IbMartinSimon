@@ -23,7 +23,7 @@ public class Currency implements Serializable {
     private Long id;
     private String date;
     private String code;
-    private String describtion;
+    private String description;
     private String rate;
 
     public String getDate() {
@@ -43,11 +43,11 @@ public class Currency implements Serializable {
     }
 
     public String getDescribtion() {
-        return describtion;
+        return description;
     }
 
     public void setDescribtion(String describtion) {
-        this.describtion = describtion;
+        this.description = describtion;
     }
 
     public String getRate() {
@@ -60,7 +60,7 @@ public class Currency implements Serializable {
 
     @Override
     public String toString() {
-        return "Currency{" + "date=" + date + ", code=" + code + ", describtion=" + describtion + ", rate=" + rate + '}';
+        return "Currency{" + "date=" + date + ", code=" + code + ", describtion=" + description + ", rate=" + rate + '}';
     }
 
 }
