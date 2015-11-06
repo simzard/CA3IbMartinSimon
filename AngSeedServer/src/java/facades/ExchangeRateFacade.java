@@ -5,6 +5,7 @@
  */
 package facades;
 
+import com.google.gson.Gson;
 import deploy.DeploymentConfiguration;
 import entity.Currency;
 import java.io.IOException;
@@ -13,10 +14,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -80,6 +83,23 @@ public class ExchangeRateFacade {
 
             e.close();
         }
+    }
+    
+    
+    public String getDailyRates(){
+    
+        EntityManager em = getEntityManager();
+        List<Currency> dailyRates = null;
+        
+        try {
+            Query query = em.createQuery("SELECT c FROM Currency c");
+            dailyRates = query.getResultList();
+        } finally {
+            em.close();
+        }
+        
+        return new Gson().toJson(dailyRates);
+         
     }
 
     //------------------------ NESTED CLASS --------------------------------  
