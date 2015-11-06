@@ -17,7 +17,7 @@ import javax.ws.rs.ext.Provider;
  * @author simon
  */
 @Provider
-public class PersonNotFoundExceptionMapper implements ExceptionMapper<CurrencyNotFoundException> {
+public class CurrencyNotFoundExceptionMapper implements ExceptionMapper<CurrencyNotFoundException> {
 
     @Context
     ServletContext context;
