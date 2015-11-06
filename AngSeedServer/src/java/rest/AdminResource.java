@@ -25,7 +25,7 @@ public class AdminResource {
     @Produces(MediaType.APPLICATION_JSON) 
     public String deleteUser(@PathParam("id") String id) {
         if (facade.deleteUser(id)) {
-            return "{\"message\": \"user deleted\"}";
+            return "{\"message\": \"User " + id + " deleted\"}";
         }
         
         return "{\"message\": \"user NOT deleted\"}";

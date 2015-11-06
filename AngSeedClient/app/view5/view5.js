@@ -2,11 +2,33 @@
 angular.module('myApp.view5', ['ngRoute'])
 
         .config(['$routeProvider', function ($routeProvider) {
-                $routeProvider.when('/view5', {
-                    templateUrl: 'view5/view5.html',
-                    controller: 'View5Ctrl'
-                });
+                $routeProvider
+                        .when('/view5', {
+                            templateUrl: 'view5/view5.html',
+                            controller: 'View5Ctrl'
+                        })
+                        .when('/view5d/:username', {
+                            template: '<p>{{result}}</p>',
+                            controller: 'View5dCtrl'
+                        });
+
             }])
+
+        .controller('View5dCtrl', function ($scope, $http, $routeParams) {
+            
+
+            $http.delete('api/admin/user/' + $routeParams.username)
+                    .success(function (data, status, headers, config) {
+                        $scope.result = data.message;
+                        
+                      
+                    })
+                    .error(function (data, status, headers, config) {
+
+                    });
+
+
+        })
 
         .controller('View5Ctrl', function ($http, $scope) {
 
@@ -17,16 +39,10 @@ angular.module('myApp.view5', ['ngRoute'])
                     .error(function (data, status, headers, config) {
 
                     });
-            $scope.deleteUser = function (username) {
-                $http.delete('api/admin/user/' + username)
-                        .success(function (data, status, headers, config) {
-                            $scope.data = data;
-                        })
-                        .error(function (data, status, headers, config) {
 
-                        });
+            
 
-            }
+
         })
 
 //        .factory('View5Factory', function () {
