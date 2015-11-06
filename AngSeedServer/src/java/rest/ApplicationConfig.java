@@ -24,7 +24,7 @@ public class ApplicationConfig extends Application {
         resources.add(exceptions.NotFoundExceptionMapper.class);
         resources.add(rest.AdminResource.class);
         resources.add(rest.CompanyResource.class);
-        resources.add(rest.CurrencyTest.class);
+        resources.add(rest.CurrencyResource.class);
         resources.add(rest.UserResource.class);
         resources.add(security.JWTAuthenticationFilter.class);
         resources.add(security.Login.class);
