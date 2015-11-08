@@ -1,5 +1,6 @@
 package facades;
 
+import deploy.DeploymentConfiguration;
 import entity.User;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -12,8 +13,8 @@ public class UserFacade {
     private EntityManagerFactory emf;
 
     public UserFacade() {
-        this(Persistence.createEntityManagerFactory("AngSeedServerPU"));
-        //this(Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME));
+        //this(Persistence.createEntityManagerFactory("AngSeedServerPU"));
+        this(Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME));
         persistUsers();
     }
 

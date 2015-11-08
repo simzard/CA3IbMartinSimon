@@ -18,7 +18,8 @@ public class RatesUpdater implements Runnable {
     private ScheduledExecutorService scheduler;
 
     public void JobScheduler() {
-
+        xf.fetchExchangeRates();
+        
         scheduler = Executors.newSingleThreadScheduledExecutor();
         Calendar cal = Calendar.getInstance();
 

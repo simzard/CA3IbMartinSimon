@@ -19,14 +19,14 @@ public class DeploymentConfiguration implements ServletContextListener {
     public static String PU_NAME = "AngSeedServerPU";
 
     public void contextInitialized(ServletContextEvent sce) {
-       
-        
+        RatesUpdater x = new RatesUpdater();
+        x.JobScheduler();
+
         Map<String, String> env = System.getenv();
 //If we are running in the OPENSHIFT environment change the pu-name
         if (env.keySet().contains("OPENSHIFT_MYSQL_DB_HOST")) {
             PU_NAME = "pu_OPENSHIFT";
-            RatesUpdater x = new RatesUpdater();
-            x.JobScheduler();
+
         }
     }
 

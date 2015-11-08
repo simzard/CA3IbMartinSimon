@@ -56,6 +56,8 @@ public class BackendTest {
         server.join();
     }
 
+    
+    
     @Test
     public void LoginWrongUsername() {
         given().
@@ -65,7 +67,7 @@ public class BackendTest {
                 post("/login").
                 then().
                 statusCode(401).
-                body("error.message", equalTo("Ilegal username or password"));
+               body("error.message", equalTo("Ilegal username or password"));
     }
 
     @Test
